@@ -6,11 +6,17 @@ import { AppService } from './app.service';
 import { RefreshTokenModule } from './auth/refresh-token/refresh-token.module';
 import { CoreModule } from 'core/core.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
     CoreModule,
-    CacheModule.register(),
+    CacheModule.register({
+      store: redisStore,
+      host: 'localhost',
+      port: 6379,
+      ttl: 10,
+    }),
     AuthModule,
     UserModule,
     RefreshTokenModule,
