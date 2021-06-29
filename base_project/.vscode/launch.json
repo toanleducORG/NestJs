@@ -8,9 +8,20 @@
             "type": "node",
             "request": "attach",
             "name": "attack NesstJS",
-            "port": 9229,
+            "port": 9228,
             "cwd": "${workspaceFolder}",
             "restart": true,
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Auth",
+            "port": 9229,
+            "restart": true,
+            "stopOnEntry": false,
+            "remoteRoot": "/app",
+            "localRoot": "${workspaceFolder}/",
+            "protocol": "inspector",
         }
     ]
 }

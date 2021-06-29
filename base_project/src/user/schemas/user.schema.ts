@@ -1,7 +1,7 @@
 import { HookNextFunction, Document } from 'mongoose';
 import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
 import validator from 'validator';
-import { hash } from 'bcrypt';
+// import { hash } from 'bcrypt';
 
 @Schema({
   timestamps: true,
@@ -95,8 +95,8 @@ UserSchema.pre('save', async function (next: HookNextFunction) {
   // tslint:disable-next-line:no-string-literal
   console.log(this['password']);
 
-  const hashed = await hash(this['password'], 10);
-  // tslint:disable-next-line:no-string-literal
-  this['password'] = hashed;
+  // const hashed = await hash(this['password'], 10);
+  // // tslint:disable-next-line:no-string-literal
+  // this['password'] = hashed;
   return next();
 });

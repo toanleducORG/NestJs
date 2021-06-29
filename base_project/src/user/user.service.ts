@@ -8,7 +8,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { v4 } from 'uuid';
 import { addHours } from 'date-fns';
-import * as bcrypt from 'bcrypt';
+// import { compare } from 'bcrypt';
 import { ResetPasswordDto } from 'auth/auth/dto/reset-password.dto';
 import { UserModel } from './schemas/user.schema';
 
@@ -91,7 +91,8 @@ export class UserService {
   }
 
   async checkPassword(attemptPass: string, user) {
-    const match = await bcrypt.compare(attemptPass, user.password);
+    // const match = await compare(attemptPass, user.password);
+    const match = '';
     if (!match) {
       await this.passwordsDoNotMatch(user);
       throw new NotFoundException('Wrong email or password.');

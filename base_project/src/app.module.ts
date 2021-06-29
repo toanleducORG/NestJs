@@ -11,12 +11,13 @@ import * as redisStore from 'cache-manager-redis-store';
 @Module({
   imports: [
     CoreModule,
-    CacheModule.register({
-      store: redisStore,
-      host: 'localhost',
-      port: 6379,
-      ttl: 10,
-    }),
+    CacheModule.register(),
+    // CacheModule.register({
+    //   store: redisStore,
+    //   host: 'redis',
+    //   port: 6379,
+    //   ttl: 10,
+    // }),
     AuthModule,
     UserModule,
     RefreshTokenModule,

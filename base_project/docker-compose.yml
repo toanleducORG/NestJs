@@ -1,8 +1,28 @@
 version: '3.9'
 services:
+  base:
+    build: ./
+    restart: always
+    hostname: base
+    container_name: BASE
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+      - "9229:9229"
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - database
+    command: yarn run start:debug
+
   redis:
-    image: 'redis:alpine'
-    container_name: cache
+    image: redis:alpine
+    container_name: Cache
+    hostname: redis
     restart: always
     ports:
       - '6379:6379'
@@ -11,3 +31,21 @@ services:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
       - REDIS_REPLICATION_MODE=master
+      
+  database:
+    image: mongo
+    restart: always
+    hostname: mongo
+    container_name: NestJs_Database
+    env_file:
+      - .env
+    volumes:
+      - "./database/data/db:/data/db"
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+
+networks: 
+  backend:
+    driver: bridge
